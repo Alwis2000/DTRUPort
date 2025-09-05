@@ -6,6 +6,7 @@ import com.dtteam.dynamictrees.event.ApplierRegistryEvent;
 import com.dtteam.dynamictrees.tree.family.Family;
 import com.google.gson.JsonElement;
 import net.dviousdingle.dtruport.DtruPort;
+import net.dviousdingle.dtruport.tree.BrimwoodFamily;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
 
