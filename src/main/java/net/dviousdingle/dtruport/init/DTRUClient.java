@@ -6,6 +6,8 @@ package net.dviousdingle.dtruport.init;
 //import dtteam.dtru.tree.EucalyptusFamily;
 import com.dtteam.dynamictrees.tree.family.Family;
 import net.dviousdingle.dtruport.DtruPort;
+import net.dviousdingle.dtruport.block.BambooBranchBlock;
+import net.dviousdingle.dtruport.tree.EucalyptusFamily;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.neoforged.api.distmarker.Dist;

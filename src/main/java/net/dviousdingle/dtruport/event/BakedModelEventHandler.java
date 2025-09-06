@@ -11,13 +11,16 @@ import net.dviousdingle.dtruport.model.EucalyptusSurfaceRootBlockModelLoader;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.fml.common.Mod;
 //import net.minecraftforge.api.distmarker.Dist;
 //import net.minecraftforge.client.event.ModelEvent;
 //import net.minecraftforge.eventbus.api.SubscribeEvent;
 //import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = DtruPort.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+
+@EventBusSubscriber(modid = DtruPort.MOD_ID, value = Dist.CLIENT)
 public final class BakedModelEventHandler {
 
     public static final ResourceLocation BAMBOO = DtruPort.location("bamboo");
@@ -26,9 +29,9 @@ public final class BakedModelEventHandler {
 
     @SubscribeEvent
     public static void onModelRegistryEvent(ModelEvent.RegisterGeometryLoaders event) {
-        event.register(BAMBOO.getPath(), new BambooBranchModelLoader());
-        event.register(EUCALYPTUS.getPath(), new EucalyptusBranchModelLoader());
-        event.register(EUCALYPTUS_SURFACE_ROOT.getPath(), new EucalyptusSurfaceRootBlockModelLoader());
+        event.register(BAMBOO, new BambooBranchModelLoader());
+        event.register(EUCALYPTUS, new EucalyptusBranchModelLoader());
+        event.register(EUCALYPTUS_SURFACE_ROOT, new EucalyptusSurfaceRootBlockModelLoader());
     }
 
 }

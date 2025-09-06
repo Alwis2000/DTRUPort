@@ -9,8 +9,9 @@ import net.dviousdingle.dtruport.DtruPort;
 import net.dviousdingle.dtruport.tree.BrimwoodFamily;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = DtruPort.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = DtruPort.MOD_ID)
 public final class RegisterJSONAppliers {
 
     @SubscribeEvent

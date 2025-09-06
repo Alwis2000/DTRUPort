@@ -110,13 +110,13 @@ public class AlternativeBranchGenFeature extends GenFeature {
 
         if (!validSpots.isEmpty()) {
             if (isWorldgen){
-                for (BlockPos listPos : validSpots.unwrap().stream().map(WeightedEntry.Wrapper::getData).collect(Collectors.toList()))
+                for (BlockPos listPos : validSpots.unwrap().stream().map(WeightedEntry.Wrapper::data).collect(Collectors.toList()))
                     if (world.getRandom().nextFloat() < configuration.get(WORLDGEN_PLACE_CHANCE))
                         placeBranch(configuration, world, listPos);
             } else {
                 WeightedEntry.Wrapper<BlockPos> posWrapper = validSpots.getRandom(world.getRandom()).orElse(null);
                 if (posWrapper == null) return;
-                placeBranch(configuration, world, posWrapper.getData());
+                placeBranch(configuration, world, posWrapper.data());
             }
 
         }

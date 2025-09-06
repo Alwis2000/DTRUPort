@@ -9,6 +9,7 @@ package net.dviousdingle.dtruport.model;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictrees.block.branch.ThickBranchBlock;
 import com.dtteam.dynamictrees.model.modeldata.ModelConnections;
+import com.dtteam.dynamictrees.model.ModelHelper;
 import com.dtteam.dynamictrees.tree.family.Family;
 import com.dtteam.dynamictrees.utility.CoordUtils;
 import com.google.common.collect.Maps;
@@ -39,6 +40,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.model.IModelBuilder;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
 import org.joml.Vector3f;
 
@@ -79,12 +81,12 @@ public class ThickEucalyptusBranchBlockBakedModel extends EucalyptusBranchBlockB
     }
 
     private boolean isTextureNull(@Nullable TextureAtlasSprite sprite) {
-        return sprite == null || sprite.equals(ModelUtils.getTexture(new ResourceLocation("")));
+        return sprite == null || sprite.equals(ModelHelper.getTexture(ResourceLocation.tryBuild("")));
     }
 
     public BakedModel bakeTrunkBark(int radius, TextureAtlasSprite bark, TextureAtlasSprite overlay, boolean side) {
 
-        IModelBuilder<?> builder = ModelUtils.getModelBuilder(this.blockModel.customData, bark);
+        IModelBuilder<?> builder = ModelHelper.getModelBuilder(this.blockModel.customData, bark);
         AABB wholeVolume = new AABB(8 - radius, 0, 8 - radius, 8 + radius, 16, 8 + radius);
 
         final Direction[] run = side ? CoordUtils.HORIZONTALS : new Direction[]{Direction.UP, Direction.DOWN};
@@ -103,19 +105,19 @@ public class ThickEucalyptusBranchBlockBakedModel extends EucalyptusBranchBlockB
                     Vec3 scaledOffset = new Vec3(offset.getX() * 16, offset.getY() * 16, offset.getZ() * 16);//Scale the dimensions to match standard minecraft texels
                     AABB partBoundary = new AABB(0, 0, 0, 16, 16, 16).move(scaledOffset).intersect(wholeVolume);
 
-                    Vector3f[] limits = ModelUtils.AABBLimits(partBoundary);
+                    Vector3f[] limits = ModelHelper.AABBLimits(partBoundary);
 
                     Map<Direction, BlockElementFace> mapFacesIn1 = Maps.newEnumMap(Direction.class);
                     Map<Direction, BlockElementFace> mapFacesIn2 = Maps.newEnumMap(Direction.class);
 
-                    BlockFaceUV uvface = new BlockFaceUV(ModelUtils.modUV(ModelUtils.getUVs(partBoundary, face)), getFaceAngle(Axis.Y, face));
+                    BlockFaceUV uvface = new BlockFaceUV(ModelHelper.modUV(ModelHelper.getUVs(partBoundary, face)), getFaceAngle(Axis.Y, face));
                     mapFacesIn1.put(face, new BlockElementFace(null, -1, null, uvface));
                     mapFacesIn2.put(face, new BlockElementFace(null, 0, null, uvface));
 
                     BlockElement part = new BlockElement(limits[0], limits[1], mapFacesIn1, null, true);
-                    builder.addCulledFace(face, ModelUtils.makeBakedQuad(part, part.faces.get(face), bark, face, BlockModelRotation.X0_Y0, this.modelLocation));
+                    builder.addCulledFace(face, ModelHelper.makeBakedQuad(part, part.faces.get(face), bark, face, BlockModelRotation.X0_Y0));
                     BlockElement part2 = new BlockElement(limits[0], limits[1], mapFacesIn2, null, true);
-                    builder.addCulledFace(face, ModelUtils.makeBakedQuad(part2, part2.faces.get(face), overlay, face, BlockModelRotation.X0_Y0, this.modelLocation));
+                    builder.addCulledFace(face, ModelHelper.makeBakedQuad(part2, part2.faces.get(face), overlay, face, BlockModelRotation.X0_Y0));
                 }
 
             }
@@ -125,7 +127,7 @@ public class ThickEucalyptusBranchBlockBakedModel extends EucalyptusBranchBlockB
     }
 
     public BakedModel bakeTrunkRings(int radius, TextureAtlasSprite ring, Direction face) {
-        IModelBuilder<?> builder = ModelUtils.getModelBuilder(this.blockModel.customData, ring);
+        IModelBuilder<?> builder = ModelHelper.getModelBuilder(this.blockModel.customData, ring);
         AABB wholeVolume = new AABB(8 - radius, 0, 8 - radius, 8 + radius, 16, 8 + radius);
         int wholeVolumeWidth = 48;
 
@@ -163,7 +165,7 @@ public class ThickEucalyptusBranchBlockBakedModel extends EucalyptusBranchBlockB
             mapFacesIn.put(face, new BlockElementFace(null, -1, null, uvface));
 
             BlockElement part = new BlockElement(posFrom, posTo, mapFacesIn, null, true);
-            builder.addCulledFace(face, ModelUtils.makeBakedQuad(part, part.faces.get(face), ring, face, BlockModelRotation.X0_Y0, this.modelLocation));
+            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part, part.faces.get(face), ring, face, BlockModelRotation.X0_Y0));
         }
 
         return builder.build();
@@ -190,7 +192,7 @@ public class ThickEucalyptusBranchBlockBakedModel extends EucalyptusBranchBlockB
         Direction forceRingDir = null;
         int twigRadius = 1;
 
-        ModelConnections connectionsData = extraData.get(ModelConnections.CONNECTIONS_PROPERTY);
+        ModelConnections connectionsData = extraData. get(ModelConnections.CONNECTIONS_PROPERTY);
         if (connectionsData != null) {
             connections = connectionsData.getAllRadii();
             forceRingDir = connectionsData.getRingOnly();
