@@ -14,6 +14,7 @@ import com.dtteam.dynamictrees.systems.genfeature.GenFeature;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeatureConfiguration;
 import com.dtteam.dynamictrees.systems.genfeature.context.FullGenerationContext;
 import com.dtteam.dynamictrees.tree.species.Species;
+import com.dtteam.dynamictrees.worldgen.DynamicTreeGenerationContext;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 
@@ -48,7 +49,7 @@ public class SoilWhitelistGenFeature extends GenFeature {
         if (context.random().nextFloat() < configuration.get(REPLACEMENT_CHANCE)){
             Species species = configuration.get(REPLACEMENT_SPECIES);
             if (species.isValid())
-                species.generate(new GenerationContext(context.levelContext(), species, context.pos(), context.pos().mutable(), context.biome(), Direction.Plane.HORIZONTAL.getRandomDirection(context.random()), context.radius(), context.bounds()));
+                species.generate(new DynamicTreeGenerationContext(context.levelContext(), species, context.pos(), context.pos().mutable(), context.biome(), Direction.Plane.HORIZONTAL.getRandomDirection(context.random()), context.radius(), context.isWorldGen()));
         }
         return true;
     }

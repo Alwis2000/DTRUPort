@@ -5,7 +5,10 @@ import com.dtteam.dynamictrees.block.soil.SoilProperties;
 import com.dtteam.dynamictrees.data.GatherDataHelper;
 import com.dtteam.dynamictrees.tree.family.Family;
 import com.dtteam.dynamictrees.tree.species.Species;
+import com.dtteam.dynamictrees.api.registry.RegistryHandler;
+import net.dviousdingle.dtruport.init.DTRUClient;
 import net.dviousdingle.dtruport.init.DTRUPlusRegistries;
+import net.dviousdingle.dtruport.init.DTRURegistries;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
 
@@ -56,7 +59,9 @@ public class DtruPort {
 
         NeoForge.EVENT_BUS.register(this);
 
-        RegistryHandler.setup(MOD_ID);
+        RegistryHandler.get(MOD_ID);
+//        RegistryHandler.get(MOD_ID) setup(MOD_ID);
+
         DTRURegistries.setup();
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
@@ -87,7 +92,7 @@ public class DtruPort {
     }
 
     public static ResourceLocation location (String name){
-        return new ResourceLocation(MOD_ID, name);
+        return ResourceLocation.tryBuild(MOD_ID, name);
     }
 
     public static boolean isDynamicTreesPlusLoaded(){

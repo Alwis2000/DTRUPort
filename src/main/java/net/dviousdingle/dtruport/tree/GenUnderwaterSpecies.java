@@ -45,17 +45,16 @@ public class GenUnderwaterSpecies extends Species {
     }
 
     @Override
-    public BlockPos preGeneration(LevelAccessor world, BlockPos.MutableBlockPos rootPos, int radius, Direction facing, SafeChunkBounds safeBounds, JoCode joCode) {
-        if (this.isWater(world.getBlockState(rootPos))){
+    public BlockPos preGeneration(LevelAccessor level, BlockPos.MutableBlockPos rootPos, int radius, Direction facing, boolean worldGen, JoCode joCode) {
+        if (this.isWater(level.getBlockState(rootPos))){
             for (int i=1; i<=maxDepth; i++){
                 rootPos.move(Direction.DOWN);
-                final BlockState downState = world.getBlockState(rootPos);
+                final BlockState downState = level.getBlockState(rootPos);
 
                 if (!isWater(downState) && isAcceptableSoilForWorldgen(downState))
                     break;
             }
         }
-        return super.preGeneration(world, rootPos, radius, facing, safeBounds, joCode);
+        return super.preGeneration(level, rootPos, radius, facing, worldGen, joCode);
     }
-
 }

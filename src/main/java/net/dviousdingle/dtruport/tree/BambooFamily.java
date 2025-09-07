@@ -45,9 +45,9 @@ public class BambooFamily extends Family {
 //        return 2;
 //    }
 
-    public BlockBounds expandLeavesBlockBounds(BlockBounds bounds) {
-        return bounds.expand(3).expand(Direction.DOWN, 3);
-    }
+//    public BlockBounds expandLeavesBlockBounds(BlockBounds bounds) {
+//        return bounds.expand(3).expand(Direction.DOWN, 3);
+//    }
 
     @Override
     public BiFunction<BlockModelBuilder, ExistingFileHelper, BranchLoaderBuilder> getBranchLoaderConstructor() {

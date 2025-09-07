@@ -4,6 +4,7 @@ package net.dviousdingle.dtruport.model;
 //import com.ferreusveritas.dynamictrees.client.ModelUtils;
 //import com.ferreusveritas.dynamictrees.models.modeldata.ModelConnections;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
+import com.dtteam.dynamictrees.model.ModelHelper;
 import com.dtteam.dynamictrees.model.modeldata.ModelConnections;
 import com.google.common.collect.Maps;
 //import dtteam.dtru.block.BambooBranchBlock;
@@ -116,14 +117,14 @@ public class BambooBranchBlockBakedModel implements IDynamicBakedModel {
         BlockElement part1 = new BlockElement(posFrom1, posTo1, mapFacesIn, rot1, false);
         BlockElement part2 = new BlockElement(posFrom2, posTo2, mapFacesIn, rot2, false);
 
-        IModelBuilder<?> builder = ModelUtils.getModelBuilder(this.blockModel.customData, leavesTexture);
+        IModelBuilder<?> builder = ModelHelper.getModelBuilder(this.blockModel.customData, leavesTexture);
         for (Map.Entry<Direction, BlockElementFace> e : part1.faces.entrySet()) {
             Direction face = e.getKey();
-            builder.addCulledFace(face, ModelUtils.makeBakedQuad(part1, e.getValue(), leavesTexture, face, BlockModelRotation.X0_Y0, this.modelLocation));
+            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part1, e.getValue(), leavesTexture, face, BlockModelRotation.X0_Y0));
         }
         for (Map.Entry<Direction, BlockElementFace> e : part2.faces.entrySet()) {
             Direction face = e.getKey();
-            builder.addCulledFace(face, ModelUtils.makeBakedQuad(part2, e.getValue(), leavesTexture, face, BlockModelRotation.X0_Y0, this.modelLocation));
+            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part2, e.getValue(), leavesTexture, face, BlockModelRotation.X0_Y0));
         }
 
         return builder.build();
@@ -178,11 +179,11 @@ public class BambooBranchBlockBakedModel implements IDynamicBakedModel {
     public BakedModel bakeSleeve(int radius, Direction dir, TextureAtlasSprite bark) {
 
         BlockElement part = generateSleevePart(radius, dir, false);
-        IModelBuilder<?> builder = ModelUtils.getModelBuilder(this.blockModel.customData, bark);
+        IModelBuilder<?> builder = ModelHelper.getModelBuilder(this.blockModel.customData, bark);
 
         for (Map.Entry<Direction, BlockElementFace> e : part.faces.entrySet()) {
             Direction face = e.getKey();
-            builder.addCulledFace(face, ModelUtils.makeBakedQuad(part, e.getValue(), bark, face, BlockModelRotation.X0_Y0, this.modelLocation));
+            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part, e.getValue(), bark, face, BlockModelRotation.X0_Y0));
         }
 
         return builder.build();
@@ -212,11 +213,11 @@ public class BambooBranchBlockBakedModel implements IDynamicBakedModel {
     public BakedModel bakeCore(int radius, Axis axis, TextureAtlasSprite icon, boolean isRings) {
 
         BlockElement part = generateCorePart(radius, axis, false, isRings);
-        IModelBuilder<?> builder = ModelUtils.getModelBuilder(this.blockModel.customData, icon);
+        IModelBuilder<?> builder = ModelHelper.getModelBuilder(this.blockModel.customData, icon);
 
         for (Map.Entry<Direction, BlockElementFace> e : part.faces.entrySet()) {
             Direction face = e.getKey();
-            builder.addCulledFace(face, ModelUtils.makeBakedQuad(part, e.getValue(), icon, face, BlockModelRotation.X0_Y0, this.modelLocation));
+            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part, e.getValue(), icon, face, BlockModelRotation.X0_Y0));
         }
 
         return builder.build();

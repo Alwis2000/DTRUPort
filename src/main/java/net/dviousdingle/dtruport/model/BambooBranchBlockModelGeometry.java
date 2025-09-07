@@ -29,9 +29,14 @@ public class BambooBranchBlockModelGeometry extends BranchBlockModelGeometry {
         this.leavesTextureLocation = leavesTextureLocation;
     }
 
-    @Override
-    public BakedModel bake(IGeometryBakingContext owner, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ItemOverrides overrides, ResourceLocation modelLocation) {
-        return new BambooBranchBlockBakedModel(owner, modelLocation, this.barkTextureLocation, this.ringsTextureLocation, this.leavesTextureLocation, spriteGetter);
-    }
+//    @Override
+//    public BakedModel bake(IGeometryBakingContext owner, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ItemOverrides overrides, ResourceLocation modelLocation) {
+//        return new BambooBranchBlockBakedModel(owner, modelLocation, this.barkTextureLocation, this.ringsTextureLocation, this.leavesTextureLocation, spriteGetter);
+//    }
 
+
+    @Override
+    public BakedModel bake(IGeometryBakingContext context, ModelBaker modelBaker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides itemOverrides) {
+        return new BambooBranchBlockBakedModel(context, modelBaker, this.barkTextureLocation, this.ringsTextureLocation, this.leavesTextureLocation, spriteGetter);
+    }
 }

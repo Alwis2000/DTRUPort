@@ -33,6 +33,8 @@ import net.dviousdingle.dtruport.cell.DTRUCellKits;
 import net.dviousdingle.dtruport.genfeature.DTRUGenFeatures;
 import net.dviousdingle.dtruport.growthlogic.DTRUGrowthLogicKits;
 import net.dviousdingle.dtruport.tree.GenUnderwaterSpecies;
+import net.dviousdingle.dtruport.tree.*;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -44,6 +46,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.regions_unexplored.world.features.treedecorators.BlackwoodBioshroom;
 import net.regions_unexplored.world.level.feature.configuration.GiantBioshroomConfiguration;
 import net.regions_unexplored.world.level.feature.configuration.RuTreeConfiguration;
 import net.regions_unexplored.world.level.feature.tree.*;

@@ -16,6 +16,8 @@ import com.dtteam.dynamictrees.tree.species.Species;
 //import dtteam.dtru.tree.BrimwoodFamily;
 //import dtteam.dtru.tree.TransitionLogFamily;
 import net.dviousdingle.dtruport.block.TransitionLogBranchBlock;
+import net.dviousdingle.dtruport.tree.BrimwoodFamily;
+import net.dviousdingle.dtruport.tree.TransitionLogFamily;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;

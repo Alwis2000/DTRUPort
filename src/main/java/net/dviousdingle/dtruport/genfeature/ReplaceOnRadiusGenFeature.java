@@ -9,11 +9,13 @@ package net.dviousdingle.dtruport.genfeature;
 //import com.ferreusveritas.dynamictrees.worldgen.GenerationContext;
 import com.dtteam.dynamictrees.api.configuration.ConfigurationProperty;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeature;
+import com.dtteam.dynamictrees.worldgen.DynamicTreeGenerationContext;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeatureConfiguration;
 import com.dtteam.dynamictrees.systems.genfeature.context.FullGenerationContext;
 import com.dtteam.dynamictrees.tree.species.Species;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.structure.Structure;
 
 /**
  * @author Max Hyper
@@ -50,7 +52,7 @@ public class ReplaceOnRadiusGenFeature extends GenFeature {
     protected boolean generate(GenFeatureConfiguration configuration, FullGenerationContext context) {
         if (context.radius() > configuration.get(MIN_RADIUS) || context.radius() < configuration.get(MAX_RADIUS)){
             Species species = configuration.get(SPECIES);
-            species.generate(new GenerationContext(context.levelContext(), species, context.pos(), context.pos().mutable(), context.biome(), Direction.Plane.HORIZONTAL.getRandomDirection(context.random()), context.radius(), context.bounds()));
+            species.generate(new DynamicTreeGenerationContext(context.levelContext(), species, context.pos(), context.pos().mutable(), context.biome(), Direction.Plane.HORIZONTAL.getRandomDirection(context.random()), context.radius(), context.isWorldGen()));
             return true;
         }
         return false;

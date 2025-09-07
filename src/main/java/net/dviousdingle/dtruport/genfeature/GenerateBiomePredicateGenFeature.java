@@ -7,6 +7,7 @@ package net.dviousdingle.dtruport.genfeature;
 //import com.ferreusveritas.dynamictrees.systems.genfeature.context.FullGenerationContext;
 import com.dtteam.dynamictrees.api.configuration.ConfigurationProperty;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeature;
+import com.dtteam.dynamictrees.DynamicTrees;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeatureConfiguration;
 import com.dtteam.dynamictrees.systems.genfeature.context.FullGenerationContext;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +36,7 @@ public class GenerateBiomePredicateGenFeature extends GenFeature {
     protected boolean generate(GenFeatureConfiguration configuration, FullGenerationContext context) {
         final GenFeatureConfiguration configurationToPlace = configuration.get(GEN_FEATURE);
 
-        if (configuration.getGenFeature().getRegistryName().equals(DTTrees.NULL)) { // If the gen feature was null, do nothing.
+        if (configuration.getGenFeature().getRegistryName().equals(DynamicTrees.NULL)) { // If the gen feature was null, do nothing.
             return false;
         }
 

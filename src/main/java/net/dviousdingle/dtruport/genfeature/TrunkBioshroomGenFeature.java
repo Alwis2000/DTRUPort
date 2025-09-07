@@ -1,4 +1,4 @@
-package dtteam.dtru.genfeature;
+package net.dviousdingle.dtruport.genfeature;
 
 //import com.ferreusveritas.dynamictrees.api.TreeHelper;
 //import com.ferreusveritas.dynamictrees.api.configuration.ConfigurationProperty;

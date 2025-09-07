@@ -81,7 +81,7 @@ public class ThickEucalyptusBranchBlockBakedModel extends EucalyptusBranchBlockB
     }
 
     private boolean isTextureNull(@Nullable TextureAtlasSprite sprite) {
-        return sprite == null || sprite.equals(ModelHelper.getTexture(ResourceLocation.tryBuild("")));
+        return sprite == null || sprite.equals(ModelHelper.getTexture(ResourceLocation.withDefaultNamespace("")));
     }
 
     public BakedModel bakeTrunkBark(int radius, TextureAtlasSprite bark, TextureAtlasSprite overlay, boolean side) {
