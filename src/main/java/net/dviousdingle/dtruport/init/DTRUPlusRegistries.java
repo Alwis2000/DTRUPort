@@ -17,6 +17,7 @@ package net.dviousdingle.dtruport.init;
 //import dtteam.dtru.block.YellowBioshroomCapProperties;
 //import dtteam.dtru.tree.BioshroomSpecies;
 //import dtteam.dtru.tree.SmallBioshroomSpecies;
+import com.dtteam.dynamictrees.api.cell.CellKit;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictrees.block.leaves.LeavesProperties;
 import com.dtteam.dynamictrees.block.soil.SoilProperties;
@@ -60,6 +61,7 @@ public class DTRUPlusRegistries {
 
     @SubscribeEvent
     public void registerCapPropertiesTypes(final TypeRegistryEvent<CapProperties> event) {
+        if (!event.isEntryOfType(CellKit.class)) return;
         event.registerType(DtruPort.location("bioshroom_cap"), BioshroomCapProperties.TYPE);
         event.registerType(DtruPort.location("pink_bioshroom_cap"), PinkBioshroomCapProperties.TYPE);
         event.registerType(DtruPort.location("yellow_bioshroom_cap"), YellowBioshroomCapProperties.TYPE);
@@ -67,6 +69,7 @@ public class DTRUPlusRegistries {
     }
 
     public static void registerSpeciesTypes(final TypeRegistryEvent<Species> event) {
+        if (!event.isEntryOfType(CellKit.class)) return;
         event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "bioshroom"), BioshroomSpecies.TYPE);
         event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "small_bioshroom"), SmallBioshroomSpecies.TYPE);
     }

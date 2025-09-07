@@ -11,18 +11,7 @@ import net.dviousdingle.dtruport.init.DTRUPlusRegistries;
 import net.dviousdingle.dtruport.init.DTRURegistries;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
-//import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
-//import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
-//import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
-//import com.ferreusveritas.dynamictrees.block.rooty.SoilProperties;
-//import com.ferreusveritas.dynamictrees.tree.family.Family;
-//import com.ferreusveritas.dynamictrees.tree.species.Species;
-//import dtteam.dtru.init.DTRUClient;
-//import dtteam.dtru.init.DTRUPlusRegistries;
-//import dtteam.dtru.init.DTRURegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
@@ -35,6 +24,17 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
+import java.util.Objects;
+//import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
+//import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
+//import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
+//import com.ferreusveritas.dynamictrees.block.rooty.SoilProperties;
+//import com.ferreusveritas.dynamictrees.tree.family.Family;
+//import com.ferreusveritas.dynamictrees.tree.species.Species;
+//import dtteam.dtru.init.DTRUClient;
+//import dtteam.dtru.init.DTRUPlusRegistries;
+//import dtteam.dtru.init.DTRURegistries;
+
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(DtruPort.MOD_ID)
@@ -43,6 +43,8 @@ public class DtruPort {
     public static final String MOD_ID = "dtru";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final boolean useLogger = Objects.equals(System.getProperty("forgegradle.runs.dev"), "true");
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.

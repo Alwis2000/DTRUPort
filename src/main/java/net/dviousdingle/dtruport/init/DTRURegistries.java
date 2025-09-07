@@ -77,26 +77,31 @@ public class DTRURegistries {
 
     @SubscribeEvent
     public static void onGenFeatureRegistry(final RegistryEvent<GenFeature> event) {
+        if (!event.isEntryOfType(CellKit.class)) return;
         DTRUGenFeatures.register(event.getRegistry());
     }
 
     @SubscribeEvent
     public static void onGrowthLogicKitRegistry(final RegistryEvent<GrowthLogicKit> event) {
+        if (!event.isEntryOfType(CellKit.class)) return;
         DTRUGrowthLogicKits.register(event.getRegistry());
     }
 
     @SubscribeEvent
     public static void onCellKitRegistry(final RegistryEvent<CellKit> event) {
+        if (!event.isEntryOfType(CellKit.class)) return;
         DTRUCellKits.register(event.getRegistry());
     }
 
     @SubscribeEvent
     public static void registerLeavesPropertiesTypes(TypeRegistryEvent<LeavesProperties> event) {
-        //event.registerType(new ResourceLocation(DtruPort.MOD_ID, "cobweb"), CobwebLeavesProperties.TYPE);
+        if (!event.isEntryOfType(CellKit.class)) return;
+        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "cobweb"), CobwebLeavesProperties.TYPE);
     }
 
     @SubscribeEvent
     public static void registerSpeciesTypes(final TypeRegistryEvent<Species> event) {
+        if (!event.isEntryOfType(CellKit.class)) return;
         event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "cypress"), GenUnderwaterSpecies.TYPE);
         if (DtruPort.isDynamicTreesPlusLoaded()){
             DTRUPlusRegistries.registerSpeciesTypes(event);
@@ -105,6 +110,7 @@ public class DTRURegistries {
 
     @SubscribeEvent
     public static void registerFamilyTypes(final TypeRegistryEvent<Family> event) {
+        if (!event.isEntryOfType(CellKit.class)) return;
         event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "bamboo"), BambooFamily.TYPE);
         event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "eucalyptus"), EucalyptusFamily.TYPE);
         event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "stripped_transition_log"), TransitionLogFamily.TYPE_STRIPPED);
@@ -164,6 +170,7 @@ public class DTRURegistries {
 
     @SubscribeEvent
     public static void onFeatureCancellerRegistry(final RegistryEvent<FeatureCanceller> event) {
+        if (!event.isEntryOfType(CellKit.class)) return;
         event.getRegistry().registerAll(RU_TREE_CANCELLER, RU_TREE2_CANCELLER, RU_MUSHROOM_CANCELLER, RU_MUSHROOM2_CANCELLER, TREE_NO_SHROOMS_CANCELLER);
     }
 }
