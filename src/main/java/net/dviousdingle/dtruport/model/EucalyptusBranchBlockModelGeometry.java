@@ -43,9 +43,21 @@ public class EucalyptusBranchBlockModelGeometry extends BranchBlockModelGeometry
         }
     }
 
+    @Override
+    public BakedModel bake(IGeometryBakingContext context, ModelBaker modelBaker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides itemOverrides) {
+        boolean useThickModel = this.useThickModel(this.setFamily(modelLocation));
+        if (!useThickModel) {
+            return new EucalyptusBranchBlockBakedModel(context, this.barkTextureLocation, this.ringsTextureLocation, this.overlayTextureLocation, spriteGetter);
+        } else {
+            if (this.thickRingsTextureLocation == null)
+                this.thickRingsTextureLocation = this.ringsTextureLocation.withSuffix("_thick");
+            return new ThickEucalyptusBranchBlockBakedModel(context, this.barkTextureLocation, this.ringsTextureLocation, this.overlayTextureLocation, this.thickRingsTextureLocation, spriteGetter);
+        }
+    }
+
     private ResourceLocation setFamilyName(final ResourceLocation modelLocation) {
         if (this.familyName == null) {
-            this.familyName = new ResourceLocation(modelLocation.getNamespace(), modelLocation.getPath().replace("block/", "").replace("_branch", "").replace("stripped_", ""));
+            this.familyName = ResourceLocation.tryBuild(modelLocation.getNamespace(), modelLocation.getPath().replace("block/", "").replace("_branch", "").replace("stripped_", ""));
         }
         return this.familyName;
     }

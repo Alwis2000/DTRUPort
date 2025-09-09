@@ -28,7 +28,7 @@ public class DTRUClient {
     private static void registerRenderLayers () {
 //        ForgeRegistries.BLOCKS.getValues().stream().filter(block -> block instanceof BambooBranchBlock)
 //                .forEach(block -> ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutoutMipped()));
-//        BuiltInRegistries.BLOCK.stream().collect().
+        BuiltInRegistries.BLOCK.stream().filter(block -> block instanceof BambooBranchBlock).forEach(block -> ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutoutMipped()));
     }
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(

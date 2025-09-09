@@ -1,9 +1,10 @@
 package net.dviousdingle.dtruport.model;
 
 //import com.ferreusveritas.dynamictrees.block.branch.BranchBlock;
-//import com.ferreusveritas.dynamictrees.client.ModelUtils;
+//import com.ferreusveritas.dynamictrees.client.ModelHelper;
 //import com.ferreusveritas.dynamictrees.models.modeldata.ModelConnections;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
+import com.dtteam.dynamictrees.model.ModelHelper;
 import com.dtteam.dynamictrees.model.modeldata.ModelConnections;
 import com.google.common.collect.Maps;
 //import dtteam.dtru.block.BambooBranchBlock;
@@ -52,7 +53,7 @@ public class EucalyptusBranchBlockBakedModel implements IDynamicBakedModel {
 
     protected final BlockModel blockModel;
 
-    protected final ResourceLocation modelLocation;
+//    protected final ResourceLocation modelLocation;
 
     protected final TextureAtlasSprite barkTexture;
     protected final TextureAtlasSprite barkOverlayTexture;
@@ -63,12 +64,12 @@ public class EucalyptusBranchBlockBakedModel implements IDynamicBakedModel {
     protected final BakedModel[][] cores = new BakedModel[3][8]; // 8 Cores for 3 axis with the bark texture all all 6 sides rotated appropriately.
     protected final BakedModel[] rings = new BakedModel[8]; // 8 Cores with the ring textures on all 6 sides.
 
-    public EucalyptusBranchBlockBakedModel(IGeometryBakingContext customData, ResourceLocation modelLocation, ResourceLocation barkTextureLocation, ResourceLocation ringsTextureLocation, ResourceLocation overlayTextureLocation,
+    public EucalyptusBranchBlockBakedModel(IGeometryBakingContext customData, ResourceLocation barkTextureLocation, ResourceLocation ringsTextureLocation, ResourceLocation overlayTextureLocation,
                                            Function<Material, TextureAtlasSprite> spriteGetter) {
         this.blockModel = new BlockModel(null, new ArrayList<>(), new HashMap<>(), false, BlockModel.GuiLight.FRONT,
                 ItemTransforms.NO_TRANSFORMS, new ArrayList<>());
         this.blockModel.customData.setRenderTypeHint(customData.getRenderTypeHint());
-        this.modelLocation = modelLocation;
+//        this.modelLocation = modelLocation;
         this.barkTexture = spriteGetter.apply(new Material(InventoryMenu.BLOCK_ATLAS, barkTextureLocation));
         this.barkOverlayTexture = spriteGetter.apply(new Material(InventoryMenu.BLOCK_ATLAS, overlayTextureLocation));
         this.ringsTexture = spriteGetter.apply(new Material(InventoryMenu.BLOCK_ATLAS, ringsTextureLocation));
@@ -141,15 +142,15 @@ public class EucalyptusBranchBlockBakedModel implements IDynamicBakedModel {
 
         BlockElement part = generateSleevePart(radius, dir, false, -1);
         BlockElement part2 = generateSleevePart(radius, dir, false, 0);
-        IModelBuilder<?> builder = ModelUtils.getModelBuilder(this.blockModel.customData, bark);
+        IModelBuilder<?> builder = ModelHelper.getModelBuilder(this.blockModel.customData, bark);
 
         for (Map.Entry<Direction, BlockElementFace> e : part.faces.entrySet()) {
             Direction face = e.getKey();
-            builder.addCulledFace(face, ModelUtils.makeBakedQuad(part, e.getValue(), bark, face, BlockModelRotation.X0_Y0, this.modelLocation));
+            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part, e.getValue(), bark, face, BlockModelRotation.X0_Y0));
         }
         for (Map.Entry<Direction, BlockElementFace> e : part2.faces.entrySet()) {
             Direction face = e.getKey();
-            builder.addCulledFace(face, ModelUtils.makeBakedQuad(part2, e.getValue(), overlay, face, BlockModelRotation.X0_Y0, this.modelLocation));
+            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part2, e.getValue(), overlay, face, BlockModelRotation.X0_Y0));
         }
 
         return builder.build();
@@ -177,15 +178,15 @@ public class EucalyptusBranchBlockBakedModel implements IDynamicBakedModel {
 
         BlockElement part = generateCorePart(radius, axis, false, -1);
         BlockElement part2 = generateCorePart(radius, axis, false, 0);
-        IModelBuilder<?> builder = ModelUtils.getModelBuilder(this.blockModel.customData, bark);
+        IModelBuilder<?> builder = ModelHelper.getModelBuilder(this.blockModel.customData, bark);
 
         for (Map.Entry<Direction, BlockElementFace> e : part.faces.entrySet()) {
             Direction face = e.getKey();
-            builder.addCulledFace(face, ModelUtils.makeBakedQuad(part, e.getValue(), bark, face, BlockModelRotation.X0_Y0, this.modelLocation));
+            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part, e.getValue(), bark, face, BlockModelRotation.X0_Y0));
         }
         for (Map.Entry<Direction, BlockElementFace> e : part2.faces.entrySet()) {
             Direction face = e.getKey();
-            builder.addCulledFace(face, ModelUtils.makeBakedQuad(part2, e.getValue(), overlay, face, BlockModelRotation.X0_Y0, this.modelLocation));
+            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part2, e.getValue(), overlay, face, BlockModelRotation.X0_Y0));
         }
 
         return builder.build();

@@ -60,9 +60,9 @@ public class ThickEucalyptusBranchBlockBakedModel extends EucalyptusBranchBlockB
     private final BakedModel[] trunksTopRings = new BakedModel[16]; // The trunk will feature rings on its top when there's no branches on top of it.
     private final BakedModel[] trunksBotRings = new BakedModel[16]; // The trunk will always feature rings on its bottom surface if nothing is below it.
 
-    public ThickEucalyptusBranchBlockBakedModel(IGeometryBakingContext customData, ResourceLocation modelLocation, ResourceLocation barkTextureLocation, ResourceLocation ringsTextureLocation, ResourceLocation overlayTextureLocation,
+    public ThickEucalyptusBranchBlockBakedModel(IGeometryBakingContext customData, ResourceLocation barkTextureLocation, ResourceLocation ringsTextureLocation, ResourceLocation overlayTextureLocation,
                                                 ResourceLocation thickRingsTextureLocation, Function<Material, TextureAtlasSprite> spriteGetter) {
-        super(customData, modelLocation, barkTextureLocation, ringsTextureLocation, overlayTextureLocation, spriteGetter);
+        super(customData, barkTextureLocation, ringsTextureLocation, overlayTextureLocation, spriteGetter);
         initThickModels(spriteGetter.apply(new Material(InventoryMenu.BLOCK_ATLAS, thickRingsTextureLocation)));
     }
 

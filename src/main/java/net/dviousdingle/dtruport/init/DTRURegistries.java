@@ -35,6 +35,7 @@ import net.dviousdingle.dtruport.growthlogic.DTRUGrowthLogicKits;
 import net.dviousdingle.dtruport.tree.GenUnderwaterSpecies;
 import net.dviousdingle.dtruport.tree.*;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -77,13 +78,13 @@ public class DTRURegistries {
 
     @SubscribeEvent
     public static void onGenFeatureRegistry(final RegistryEvent<GenFeature> event) {
-        if (!event.isEntryOfType(CellKit.class)) return;
+        if (!event.isEntryOfType(GenFeature.class)) return;
         DTRUGenFeatures.register(event.getRegistry());
     }
 
     @SubscribeEvent
     public static void onGrowthLogicKitRegistry(final RegistryEvent<GrowthLogicKit> event) {
-        if (!event.isEntryOfType(CellKit.class)) return;
+        if (!event.isEntryOfType(GrowthLogicKit.class)) return;
         DTRUGrowthLogicKits.register(event.getRegistry());
     }
 
@@ -93,15 +94,15 @@ public class DTRURegistries {
         DTRUCellKits.register(event.getRegistry());
     }
 
-    @SubscribeEvent
-    public static void registerLeavesPropertiesTypes(TypeRegistryEvent<LeavesProperties> event) {
-        if (!event.isEntryOfType(CellKit.class)) return;
-        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "cobweb"), CobwebLeavesProperties.TYPE);
-    }
+//    @SubscribeEvent
+//    public static void registerLeavesPropertiesTypes(TypeRegistryEvent<LeavesProperties> event) {
+//        if (!event.isEntryOfType(CellKit.class)) return;
+//        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "cobweb"), CobwebLeavesProperties.TYPE);
+//    }
 
     @SubscribeEvent
     public static void registerSpeciesTypes(final TypeRegistryEvent<Species> event) {
-        if (!event.isEntryOfType(CellKit.class)) return;
+        if (!event.isEntryOfType(Species.class)) return;
         event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "cypress"), GenUnderwaterSpecies.TYPE);
         if (DtruPort.isDynamicTreesPlusLoaded()){
             DTRUPlusRegistries.registerSpeciesTypes(event);
@@ -110,7 +111,7 @@ public class DTRURegistries {
 
     @SubscribeEvent
     public static void registerFamilyTypes(final TypeRegistryEvent<Family> event) {
-        if (!event.isEntryOfType(CellKit.class)) return;
+        if (!event.isEntryOfType(Family.class)) return;
         event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "bamboo"), BambooFamily.TYPE);
         event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "eucalyptus"), EucalyptusFamily.TYPE);
         event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "stripped_transition_log"), TransitionLogFamily.TYPE_STRIPPED);
@@ -156,7 +157,9 @@ public class DTRURegistries {
                 String nameSpace = "";
                 final ConfiguredFeature<?, ?> nextConfiguredFeature = configuredFeature.getFeatures().findFirst().get();
                 final FeatureConfiguration nextFeatureConfig = nextConfiguredFeature.config();
-                final ResourceLocation featureRegistryName = ForgeRegistries.FEATURES.getKey(nextConfiguredFeature.feature());
+//                final ResourceLocation featureRegistryName = ForgeRegistries.FEATURES.getKey(nextConfiguredFeature.feature());
+                final ResourceLocation featureRegistryName = BuiltInRegistries.FEATURE.getKey(nextConfiguredFeature.feature());
+
                 if (featureRegistryName != null) {
                     nameSpace = featureRegistryName.getNamespace();
                 }
@@ -170,7 +173,7 @@ public class DTRURegistries {
 
     @SubscribeEvent
     public static void onFeatureCancellerRegistry(final RegistryEvent<FeatureCanceller> event) {
-        if (!event.isEntryOfType(CellKit.class)) return;
+        if (!event.isEntryOfType(FeatureCanceller.class)) return;
         event.getRegistry().registerAll(RU_TREE_CANCELLER, RU_TREE2_CANCELLER, RU_MUSHROOM_CANCELLER, RU_MUSHROOM2_CANCELLER, TREE_NO_SHROOMS_CANCELLER);
     }
 }
