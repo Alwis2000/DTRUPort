@@ -1,30 +1,5 @@
 package net.dviousdingle.dtruport;
 
-import com.dtteam.dynamictrees.block.leaves.LeavesProperties;
-import com.dtteam.dynamictrees.block.soil.SoilProperties;
-import com.dtteam.dynamictrees.data.GatherDataHelper;
-import com.dtteam.dynamictrees.tree.family.Family;
-import com.dtteam.dynamictrees.tree.species.Species;
-import com.dtteam.dynamictrees.api.registry.RegistryHandler;
-import net.dviousdingle.dtruport.init.DTRUClient;
-import net.dviousdingle.dtruport.init.DTRUPlusRegistries;
-import net.dviousdingle.dtruport.init.DTRURegistries;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
-import org.slf4j.Logger;
-import com.mojang.logging.LogUtils;
-import net.minecraft.resources.ResourceLocation;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModList;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
-
-import java.util.Objects;
 //import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
 //import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 //import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
@@ -34,43 +9,59 @@ import java.util.Objects;
 //import dtteam.dtru.init.DTRUClient;
 //import dtteam.dtru.init.DTRUPlusRegistries;
 //import dtteam.dtru.init.DTRURegistries;
+import com.dtteam.dynamictrees.api.registry.RegistryHandler;
+import com.dtteam.dynamictrees.block.leaves.LeavesProperties;
+import com.dtteam.dynamictrees.block.soil.SoilProperties;
+import com.dtteam.dynamictrees.data.GatherDataHelper;
+import com.dtteam.dynamictrees.tree.family.Family;
+import com.dtteam.dynamictrees.tree.species.Species;
+import net.dviousdingle.dtruport.init.DTRUClient;
+import net.dviousdingle.dtruport.init.DTRUPlusRegistries;
+import net.dviousdingle.dtruport.init.DTRURegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+//import net.minecraftforge.common.MinecraftForge;
+//import net.minecraftforge.data.event.GatherDataEvent;
+//import net.minecraftforge.eventbus.api.IEventBus;
+//import net.minecraftforge.fml.ModList;
+//import net.minecraftforge.fml.common.Mod;
+//import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+//import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+//import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
+// The value here should match an entry in the META-INF/mods.toml file
 @Mod(DtruPort.MOD_ID)
 public class DtruPort {
-    // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "dtru";
-    // Directly reference a slf4j logger
-    public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final boolean useLogger = Objects.equals(System.getProperty("forgegradle.runs.dev"), "true");
-
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public DtruPort(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for modloading
+    public DtruPort() {
+//        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        final IEventBus modEventBus = ModLoadingContext.get().getActiveContainer().getEventBus();
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
-        // Register ourselves for server and other game events we are interested in.
-        // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
-        // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
+        modEventBus.addListener(this::gatherData);
+
         if (isDynamicTreesPlusLoaded()){
             modEventBus.register(new DTRUPlusRegistries());
         }
 
         NeoForge.EVENT_BUS.register(this);
+//        MinecraftForge.EVENT_BUS.register(this);
 
         RegistryHandler.get(MOD_ID);
-//        RegistryHandler.get(MOD_ID) setup(MOD_ID);
-
+//        RegistryHandler.setup(MOD_ID);
         DTRURegistries.setup();
-
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    private void commonSetup(FMLCommonSetupEvent event) {
+    private void commonSetup(final FMLCommonSetupEvent event) {
         if (isDynamicTreesPlusLoaded()){
             DTRUPlusRegistries.setup();
         }
@@ -81,7 +72,7 @@ public class DtruPort {
     }
 
     private void gatherData(final GatherDataEvent event) {
-        if (isDynamicTreesPlusLoaded()) {
+        if (isDynamicTreesPlusLoaded()){
             DTRUPlusRegistries.gatherData(event);
         } else {
             GatherDataHelper.gatherAllData(MOD_ID, event,
@@ -99,12 +90,5 @@ public class DtruPort {
 
     public static boolean isDynamicTreesPlusLoaded(){
         return ModList.get().isLoaded("dynamictreesplus");
-    }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
     }
 }
