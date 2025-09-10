@@ -8,6 +8,7 @@ package net.dviousdingle.dtruport.tree;
 //import dtteam.dtru.block.BambooBranchBlock;
 //import dtteam.dtru.event.BakedModelEventHandler;
 import com.dtteam.dynamictrees.api.registry.TypedRegistry;
+import com.dtteam.dynamictrees.api.voxmap.BlockPosBounds;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictrees.data.builder.BranchLoaderBuilder;
 import com.dtteam.dynamictrees.tree.family.Family;
@@ -45,13 +46,14 @@ public class BambooFamily extends Family {
 //        return 2;
 //    }
 
-//    public BlockBounds expandLeavesBlockBounds(BlockBounds bounds) {
-//        return bounds.expand(3).expand(Direction.DOWN, 3);
+    public BlockPosBounds expandLeavesBlockBounds(BlockPosBounds bounds) {
+        return bounds.expand(3).expand(Direction.DOWN, 3);
+    }
+
+//    @Override
+//    public BiFunction<BlockModelBuilder, ExistingFileHelper, BranchLoaderBuilder> generateStateData() {
+//        return (parent, existingFileHelper) -> new BranchLoaderBuilder(BakedModelEventHandler.BAMBOO, parent, existingFileHelper);
 //    }
 
-    @Override
-    public BiFunction<BlockModelBuilder, ExistingFileHelper, BranchLoaderBuilder> getBranchLoaderConstructor() {
-        return (parent, existingFileHelper) -> new BranchLoaderBuilder(BakedModelEventHandler.BAMBOO, parent, existingFileHelper);
-    }
 
 }

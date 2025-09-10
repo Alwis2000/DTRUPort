@@ -5,6 +5,7 @@ package net.dviousdingle.dtruport.model;
 //import com.ferreusveritas.dynamictrees.models.loader.BranchBlockModelLoader;
 import com.dtteam.dynamictrees.model.geometry.BranchBlockModelGeometry;
 import com.dtteam.dynamictrees.model.loader.BranchBlockModelLoader;
+import com.dtteam.dynamictrees.utility.ResourceLocationUtils;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -31,7 +32,7 @@ public class EucalyptusBranchModelLoader extends BranchBlockModelLoader {
         final ResourceLocation familyName = this.getLocation(modelObject);
 
         return this.getModelGeometry(this.getBarkTextureLocation(textures), this.getRingsTextureLocation(textures), this.getOverlayTextureLocation(textures),
-                familyName == null ? null : TreeRegistry.processResLoc(familyName));
+                familyName == null ? null : ResourceLocationUtils.parseDTLocation(familyName));
     }
 
     protected BranchBlockModelGeometry getModelGeometry(final ResourceLocation barkResLoc, final ResourceLocation ringsResLoc, final ResourceLocation leavesResLoc, @Nullable final ResourceLocation familyResLoc) {

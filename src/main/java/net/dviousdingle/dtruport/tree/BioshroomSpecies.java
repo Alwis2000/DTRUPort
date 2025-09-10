@@ -14,6 +14,7 @@ package net.dviousdingle.dtruport.tree;
 import com.dtteam.dynamictrees.api.registry.RegistryHandler;
 import com.dtteam.dynamictrees.api.registry.TypedRegistry;
 import com.dtteam.dynamictrees.block.sapling.DynamicSaplingBlock;
+import com.dtteam.dynamictrees.registry.NeoForgeRegistryHandler;
 import com.dtteam.dynamictrees.systems.nodemapper.NetVolumeNode;
 import com.dtteam.dynamictrees.tree.family.Family;
 import com.dtteam.dynamictrees.tree.species.Species;
@@ -41,7 +42,7 @@ public class BioshroomSpecies extends HugeMushroomSpecies {
     @Override
     public Species generateSapling() {
         return !this.shouldGenerateSapling() || this.saplingBlock != null ? this :
-                this.setSapling(RegistryHandler.addBlock(this.getSaplingRegName(), () -> new DynamicSaplingBlock(this){
+                this.setSapling(NeoForgeRegistryHandler.addBlock(this.getSaplingRegName(), () -> new DynamicSaplingBlock(this){
                     @Override
                     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
                         return 10;

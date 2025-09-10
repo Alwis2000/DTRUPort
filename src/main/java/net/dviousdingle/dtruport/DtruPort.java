@@ -13,6 +13,7 @@ import com.dtteam.dynamictrees.api.registry.RegistryHandler;
 import com.dtteam.dynamictrees.block.leaves.LeavesProperties;
 import com.dtteam.dynamictrees.block.soil.SoilProperties;
 import com.dtteam.dynamictrees.data.GatherDataHelper;
+import com.dtteam.dynamictrees.registry.NeoForgeRegistryHandler;
 import com.dtteam.dynamictrees.tree.family.Family;
 import com.dtteam.dynamictrees.tree.species.Species;
 import net.dviousdingle.dtruport.init.DTRUClient;
@@ -20,12 +21,14 @@ import net.dviousdingle.dtruport.init.DTRUPlusRegistries;
 import net.dviousdingle.dtruport.init.DTRURegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 //import net.minecraftforge.common.MinecraftForge;
@@ -39,24 +42,28 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(DtruPort.MOD_ID)
+
+//@EventBusSubscriber(modid = DtruPort.MOD_ID)
 public class DtruPort {
     public static final String MOD_ID = "dtru";
 
-    public DtruPort() {
+    public DtruPort(IEventBus bus, ModContainer modContainer) {
 //        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
         final IEventBus modEventBus = ModLoadingContext.get().getActiveContainer().getEventBus();
-        modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::clientSetup);
-        modEventBus.addListener(this::gatherData);
+        bus.addListener(this::commonSetup);
+        bus.addListener(this::clientSetup);
+        bus.addListener(this::gatherData);
+//        NeoForge.EVENT_BUS.addListener(DtruPort::gatherData);
 
-        if (isDynamicTreesPlusLoaded()){
-            modEventBus.register(new DTRUPlusRegistries());
-        }
+//        if (isDynamicTreesPlusLoaded()){
+//            modEventBus.register(new DTRUPlusRegistries());
+//        }
 
-        NeoForge.EVENT_BUS.register(this);
+//        NeoForge.EVENT_BUS.register(this);
 //        MinecraftForge.EVENT_BUS.register(this);
 
-        RegistryHandler.get(MOD_ID);
+        NeoForgeRegistryHandler.setup(MOD_ID, bus);
 //        RegistryHandler.setup(MOD_ID);
         DTRURegistries.setup();
     }
@@ -66,11 +73,11 @@ public class DtruPort {
             DTRUPlusRegistries.setup();
         }
     }
-
     private void clientSetup(final FMLClientSetupEvent event) {
         DTRUClient.setup();
     }
 
+//    @SubscribeEvent
     private void gatherData(final GatherDataEvent event) {
         if (isDynamicTreesPlusLoaded()){
             DTRUPlusRegistries.gatherData(event);
@@ -84,8 +91,8 @@ public class DtruPort {
         }
     }
 
-    public static ResourceLocation location (String name){
-        return ResourceLocation.tryBuild(MOD_ID, name);
+    public static ResourceLocation location (final String name){
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 
     public static boolean isDynamicTreesPlusLoaded(){

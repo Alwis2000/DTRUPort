@@ -61,7 +61,7 @@ public class DTRUPlusRegistries {
 
     @SubscribeEvent
     public void registerCapPropertiesTypes(final TypeRegistryEvent<CapProperties> event) {
-        if (!event.isEntryOfType(CellKit.class)) return;
+        if (!event.isEntryOfType(CapProperties.class)) return;
         event.registerType(DtruPort.location("bioshroom_cap"), BioshroomCapProperties.TYPE);
         event.registerType(DtruPort.location("pink_bioshroom_cap"), PinkBioshroomCapProperties.TYPE);
         event.registerType(DtruPort.location("yellow_bioshroom_cap"), YellowBioshroomCapProperties.TYPE);
@@ -69,9 +69,9 @@ public class DTRUPlusRegistries {
     }
 
     public static void registerSpeciesTypes(final TypeRegistryEvent<Species> event) {
-        if (!event.isEntryOfType(CellKit.class)) return;
-        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "bioshroom"), BioshroomSpecies.TYPE);
-        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "small_bioshroom"), SmallBioshroomSpecies.TYPE);
+        if (!event.isEntryOfType(Species.class)) return;
+        event.registerType(DtruPort.location("bioshroom"), BioshroomSpecies.TYPE);
+        event.registerType(DtruPort.location("small_bioshroom"), SmallBioshroomSpecies.TYPE);
     }
 
     public static void setup(){

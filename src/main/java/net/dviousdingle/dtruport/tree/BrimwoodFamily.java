@@ -13,6 +13,7 @@ import com.dtteam.dynamictrees.block.branch.ThickBranchBlock;
 import com.dtteam.dynamictrees.data.Generator;
 import com.dtteam.dynamictrees.data.generator.BranchStateGenerator;
 import com.dtteam.dynamictrees.data.provider.DTBlockStateProvider;
+import com.dtteam.dynamictrees.registry.NeoForgeRegistryHandler;
 import com.dtteam.dynamictrees.tree.family.Family;
 import com.dtteam.dynamictrees.utility.Optionals;
 import com.dtteam.dynamictrees.utility.ResourceLocationUtils;
@@ -43,7 +44,7 @@ public class BrimwoodFamily extends TransitionLogFamily {
 
     protected Supplier<BranchBlock> magmaBranch;
     protected Block primitiveMagmaLog;
-    protected final MutableLazyValue<Generator<DTBlockStateProvider, Family>> magmaBranchStateGenerator;
+    protected final MutableLazyValue<MagmaBranchStateGenerator> magmaBranchStateGenerator;
 
     @Override
     public void setupBlocks() {
@@ -69,7 +70,7 @@ public class BrimwoodFamily extends TransitionLogFamily {
     }
 
     protected Supplier<BranchBlock> createMagmaBranch(ResourceLocation name) {
-        return RegistryHandler.addBlock(ResourceLocationUtils.suffix(name, this.getBranchNameSuffix()), () -> this.createMagmaBranchBlock(name));
+        return NeoForgeRegistryHandler.addBlock(ResourceLocationUtils.suffix(name, this.getBranchNameSuffix()), () -> this.createMagmaBranchBlock(name));
     }
 
     public Family setPrimitiveMagmaLog(Block primitiveLog) {

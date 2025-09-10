@@ -47,6 +47,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.regions_unexplored.world.features.treedecorators.BlackwoodBioshroom;
 import net.regions_unexplored.world.level.feature.configuration.GiantBioshroomConfiguration;
 import net.regions_unexplored.world.level.feature.configuration.RuTreeConfiguration;
@@ -62,6 +63,7 @@ import net.regions_unexplored.world.level.feature.tree.nether.TallBrimWillowFeat
 //import net.regions_unexplored.world.level.feature.tree.nether.BrimWillowFeature;
 //import net.regions_unexplored.world.level.feature.tree.nether.TallBrimWillowFeature;
 
+//@EventBusSubscriber()
 public class DTRURegistries {
     public static final VoxelShape MUSHROOM_CAP_CONE_BASE = Shapes.box(5.0D/16, 3.0D/16, 5.0D/16, 11.0D/16, 6.0D/16, 11.0D/16);
     public static final VoxelShape MUSHROOM_CAP_TIP_1 = Shapes.box(6.0D/16, 6.0D/16, 6.0D/16, 10.0D/16, 9.0D/16, 10.0D/16);
@@ -95,15 +97,15 @@ public class DTRURegistries {
     }
 
 //    @SubscribeEvent
-//    public static void registerLeavesPropertiesTypes(TypeRegistryEvent<LeavesProperties> event) {
+    public static void registerLeavesPropertiesTypes(TypeRegistryEvent<LeavesProperties> event) {
 //        if (!event.isEntryOfType(CellKit.class)) return;
-//        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "cobweb"), CobwebLeavesProperties.TYPE);
-//    }
+//        event.registerType(DtruPort.location(DtruPort.MOD_ID, "cobweb"), CobwebLeavesProperties.TYPE);
+    }
 
     @SubscribeEvent
     public static void registerSpeciesTypes(final TypeRegistryEvent<Species> event) {
         if (!event.isEntryOfType(Species.class)) return;
-        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "cypress"), GenUnderwaterSpecies.TYPE);
+        event.registerType(DtruPort.location("cypress"), GenUnderwaterSpecies.TYPE);
         if (DtruPort.isDynamicTreesPlusLoaded()){
             DTRUPlusRegistries.registerSpeciesTypes(event);
         }
@@ -112,11 +114,11 @@ public class DTRURegistries {
     @SubscribeEvent
     public static void registerFamilyTypes(final TypeRegistryEvent<Family> event) {
         if (!event.isEntryOfType(Family.class)) return;
-        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "bamboo"), BambooFamily.TYPE);
-        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "eucalyptus"), EucalyptusFamily.TYPE);
-        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "stripped_transition_log"), TransitionLogFamily.TYPE_STRIPPED);
-        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "base_transition_log"), TransitionLogFamily.TYPE_BASE);
-        event.registerType(ResourceLocation.tryBuild(DtruPort.MOD_ID, "brimwood"), BrimwoodFamily.TYPE);
+        event.registerType(DtruPort.location("bamboo"), BambooFamily.TYPE);
+        event.registerType(DtruPort.location("eucalyptus"), EucalyptusFamily.TYPE);
+        event.registerType(DtruPort.location("stripped_transition_log"), TransitionLogFamily.TYPE_STRIPPED);
+        event.registerType(DtruPort.location("base_transition_log"), TransitionLogFamily.TYPE_BASE);
+        event.registerType(DtruPort.location("brimwood"), BrimwoodFamily.TYPE);
     }
 
     public static final FeatureCanceller RU_TREE_CANCELLER = new TreeFeatureCanceller<>(DtruPort.location("tree"), RuTreeConfiguration.class);

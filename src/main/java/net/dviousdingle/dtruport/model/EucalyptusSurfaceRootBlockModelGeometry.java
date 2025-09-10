@@ -19,8 +19,8 @@ public class EucalyptusSurfaceRootBlockModelGeometry extends EucalyptusBranchBlo
     }
 
     @Override
-    public BakedModel bake(IGeometryBakingContext owner, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform,
-                           ItemOverrides overrides, ResourceLocation modelLocation) {
-        return new EucalyptusSurfaceRootBlockBakedModel(modelLocation, this.barkTextureLocation, overlayTextureLocation, spriteGetter);
+    public BakedModel bake(IGeometryBakingContext owner, ModelBaker modelBaker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform,
+                           ItemOverrides overrides) {
+        return new EucalyptusSurfaceRootBlockBakedModel(this.barkTextureLocation, this.overlayTextureLocation, spriteGetter);
     }
 }
