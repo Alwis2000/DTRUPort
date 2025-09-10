@@ -1,0 +1,10 @@
+{
+  "type": "dynamictrees:palm",
+  "common_leaves": "dtru:palm",
+  "common_species": "dtru:palm",
+  "primitive_log": "regions_unexplored:palm_log",
+  "primitive_stripped_log": "regions_unexplored:stripped_palm_log",
+  "primary_thickness": 3,
+  "secondary_thickness": 4,
+  "max_branch_radius": 16
+}

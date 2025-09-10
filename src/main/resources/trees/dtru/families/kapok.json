@@ -1,0 +1,8 @@
+{
+  "common_leaves": "dtru:kapok",
+  "common_species": "dtru:kapok",
+  "primitive_log": "regions_unexplored:kapok_log",
+  "primitive_stripped_log": "regions_unexplored:stripped_kapok_log",
+  "max_branch_radius": 24,
+  "generate_surface_root": true
+}

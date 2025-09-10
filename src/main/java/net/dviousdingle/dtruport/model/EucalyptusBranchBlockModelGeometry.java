@@ -31,21 +31,21 @@ public class EucalyptusBranchBlockModelGeometry extends BranchBlockModelGeometry
         this.overlayTextureLocation = overlayTextureLocation;
     }
 
-    @Override
-    public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ItemOverrides overrides, ResourceLocation modelLocation) {
-        boolean useThickModel = this.useThickModel(this.setFamily(modelLocation));
-        if (!useThickModel) {
-            return new EucalyptusBranchBlockBakedModel(context, modelLocation, this.barkTextureLocation, this.ringsTextureLocation, this.overlayTextureLocation, spriteGetter);
-        } else {
-            if (this.thickRingsTextureLocation == null)
-                this.thickRingsTextureLocation = this.ringsTextureLocation.withSuffix("_thick");
-            return new ThickEucalyptusBranchBlockBakedModel(context, modelLocation, this.barkTextureLocation, this.ringsTextureLocation, this.overlayTextureLocation, this.thickRingsTextureLocation, spriteGetter);
-        }
-    }
+//    @Override
+//    public BakedModel bake(IGeometryBakingContext context, ModelBaker modelBaker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ItemOverrides itemOverrides, ResourceLocation) {
+//        boolean useThickModel = forceThickness;
+//        if (!useThickModel) {
+//            return new EucalyptusBranchBlockBakedModel(context, this.barkTextureLocation, this.ringsTextureLocation, this.overlayTextureLocation, spriteGetter);
+//        } else {
+//            if (this.thickRingsTextureLocation == null)
+//                this.thickRingsTextureLocation = this.ringsTextureLocation.withSuffix("_thick");
+//            return new ThickEucalyptusBranchBlockBakedModel(context, this.barkTextureLocation, this.ringsTextureLocation, this.overlayTextureLocation, this.thickRingsTextureLocation, spriteGetter);
+//        }
+//    }
 
     @Override
     public BakedModel bake(IGeometryBakingContext context, ModelBaker modelBaker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides itemOverrides) {
-        boolean useThickModel = this.useThickModel(this.setFamily(modelLocation));
+        boolean useThickModel = forceThickness;
         if (!useThickModel) {
             return new EucalyptusBranchBlockBakedModel(context, this.barkTextureLocation, this.ringsTextureLocation, this.overlayTextureLocation, spriteGetter);
         } else {

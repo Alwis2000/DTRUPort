@@ -1,0 +1,26 @@
+{
+  "family": "dtru:maple",
+  "tapering": 0.2,
+  "signal_energy": 22.0,
+  "up_probability": 4,
+  "lowest_branch_height": 6,
+  "growth_rate": 0.8,
+  "leaves_properties": "dtru:maple",
+  "growth_logic_kit": "dtru:variate_height",
+  "environment_factors": {
+    "#forge:is_cold": 1.1,
+    "#forge:is_hot": 0.2,
+    "#forge:is_dry": 0.4,
+    "#forge:is_forest": 0.9
+  },
+  "perfect_biomes": {
+    "name": ".*maple.*"
+  },
+  "primitive_sapling": "regions_unexplored:maple_sapling",
+  "acceptable_soils": ["dirt_like"],
+  "features": [
+  ],
+  "lang_overrides": {
+    "seed": "Maple Samara"
+  }
+}

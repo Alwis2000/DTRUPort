@@ -1,0 +1,26 @@
+{
+  "family": "jungle",
+  "tapering": 0.3,
+  "signal_energy": 12.0,
+  "up_probability": 4,
+  "lowest_branch_height": 8,
+  "growth_rate": 0.8,
+  "leaves_properties": "jungle",
+  "environment_factors" : {
+    "#forge:is_cold": 0.15,
+    "#forge:is_dry": 0.2,
+    "#forge:is_hot": 1.1,
+    "#forge:is_wet": 1.1
+  },
+  "perfect_biomes": { "tag": "#forge:is_jungle" },
+  "mega_species": "mega_jungle",
+  "features" : [
+    {
+      "name": "vines",
+      "properties": {
+        "quantity": 32,
+        "max_length": 16
+      }
+    }
+  ]
+}

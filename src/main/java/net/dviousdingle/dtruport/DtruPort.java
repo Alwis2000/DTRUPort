@@ -77,7 +77,7 @@ public class DtruPort {
         DTRUClient.setup();
     }
 
-//    @SubscribeEvent
+    @SubscribeEvent
     private void gatherData(final GatherDataEvent event) {
         if (isDynamicTreesPlusLoaded()){
             DTRUPlusRegistries.gatherData(event);

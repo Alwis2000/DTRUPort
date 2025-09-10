@@ -1,0 +1,22 @@
+{
+  "family": "dtru:baobab",
+  "tapering": 0.9,
+  "signal_energy": 28.0,
+  "up_probability": 1,
+  "lowest_branch_height": 15,
+  "growth_rate": 0.4,
+  "soil_longevity": 20,
+  "max_branch_radius": 24,
+  "leaves_properties": "dtru:baobab",
+  "environment_factors": {
+    "#forge:is_cold": 0.75,
+    "#forge:is_forest": 0.9
+  },
+  "perfect_biomes": {
+    "name": "regions_unexplored:.*baobab.*"
+  },
+  "primitive_sapling": "regions_unexplored:baobab_sapling",
+  "features": [
+    "mound"
+  ]
+}

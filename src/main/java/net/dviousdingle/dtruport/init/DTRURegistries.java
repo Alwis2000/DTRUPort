@@ -96,7 +96,7 @@ public class DTRURegistries {
         DTRUCellKits.register(event.getRegistry());
     }
 
-//    @SubscribeEvent
+    @SubscribeEvent
     public static void registerLeavesPropertiesTypes(TypeRegistryEvent<LeavesProperties> event) {
 //        if (!event.isEntryOfType(CellKit.class)) return;
 //        event.registerType(DtruPort.location(DtruPort.MOD_ID, "cobweb"), CobwebLeavesProperties.TYPE);

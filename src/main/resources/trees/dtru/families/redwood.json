@@ -1,0 +1,9 @@
+{
+  "common_leaves": "dtru:redwood",
+  "common_species": "dtru:small_redwood",
+  "primitive_log": "regions_unexplored:redwood_log",
+  "primitive_stripped_log": "regions_unexplored:stripped_redwood_log",
+  "max_branch_radius": 24,
+  "max_signal_depth": 64,
+  "generate_surface_root": true
+}

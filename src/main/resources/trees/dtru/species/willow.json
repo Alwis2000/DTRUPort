@@ -1,0 +1,39 @@
+{
+  "type": "swamp_oak",
+  "family": "dtru:willow",
+  "tapering": 0.2,
+  "signal_energy": 16.0,
+  "lowest_branch_height": 6,
+  "growth_rate": 0.8,
+  "growth_logic_kit": "dtru:willow",
+  "environment_factors" : {
+    "#forge:is_snowy": 0.75,
+    "#forge:is_dry": 0.5
+  },
+  "perfect_biomes": { "tag": "#forge:is_swamp" },
+  "primitive_sapling": "regions_unexplored:willow_sapling",
+  "acceptable_soils": ["dirt_like", "water_like"],
+  "world_gen_acceptable_soils": [ "mud_like", "dirt_like", "water_like" ],
+  "features": [
+    {
+      "name": "roots",
+      "properties": {
+        "min_trunk_radius": 8,
+        "level_limit": 4,
+        "scale_factor": 14
+      }
+    },
+    "mound",
+    "bottom_flare",
+    {
+      "name": "vines",
+      "properties": {
+        "quantity": 32,
+        "max_length": 16
+      }
+    }
+  ],
+  "lang_overrides": {
+    "seed": "Willow Catkin"
+  }
+}

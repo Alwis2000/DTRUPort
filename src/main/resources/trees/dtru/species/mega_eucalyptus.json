@@ -1,0 +1,59 @@
+{
+  "family": "dtru:eucalyptus",
+  "tapering": 0.3,
+  "signal_energy": 32.0,
+  "up_probability": 5,
+  "lowest_branch_height": 3,
+  "growth_rate": 1.5,
+  "soil_longevity": 24,
+  "max_branch_radius": 22,
+  "growth_logic_kit": {
+    "name": "jungle",
+    "properties": {
+      "canopy_height": 24
+    }
+  },
+  "leaves_properties": "dtru:eucalyptus",
+  "world_gen_leaf_map_height": 64,
+  "environment_factors" : {
+    "#forge:is_snowy": 0.5,
+    "#forge:is_dry": 0.75
+  },
+  "perfect_biomes": {
+    "tag": "#minecraft:is_jungle"
+  },
+  "features": [
+    {
+      "name": "roots",
+      "properties": {
+        "level_limit": 6,
+        "scale_factor": 23
+      }
+    },
+    "bottom_flare",
+    "mound",
+    "clear_volume",
+    "bee_nest",
+    {
+      "name": "dtru:replace_on_radius",
+      "properties": {
+        "species": "dtru:eucalyptus",
+        "min_radius": 9,
+        "max_radius": 5
+      }
+    },
+    {
+      "name": "random_predicate",
+      "properties": {
+        "gen_feature": {
+          "name": "undergrowth",
+          "properties": {
+            "undergrowth_species": "dynamictrees:oak_undergrowth",
+            "proportion_of_secondary_species": 0
+          }
+        },
+        "only_world_gen": true
+      }
+    }
+  ]
+}

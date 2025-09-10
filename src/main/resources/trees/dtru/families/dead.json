@@ -1,0 +1,7 @@
+{
+  "common_leaves": "dtru:dead",
+  "common_species": "dtru:dead",
+  "primitive_log": "regions_unexplored:dead_log",
+  "primitive_stripped_log": "regions_unexplored:stripped_dead_log",
+  "max_branch_radius": 8
+}

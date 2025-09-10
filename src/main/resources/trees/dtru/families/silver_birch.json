@@ -1,0 +1,11 @@
+{
+  "type": "dtru:base_transition_log",
+  "common_leaves": "dtru:silver_birch",
+  "common_species": "dtru:silver_birch",
+  "primitive_log": "regions_unexplored:silver_birch_log",
+  "primitive_stripped_log": "stripped_birch_log",
+  "max_branch_radius": 8,
+  "texture_overrides": {
+    "branch_top": "minecraft:block/birch_log_top"
+  }
+}

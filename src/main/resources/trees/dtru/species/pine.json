@@ -1,0 +1,58 @@
+{
+  "family": "dtru:pine",
+  "tapering": 0.3,
+  "signal_energy": 20.0,
+  "up_probability": 10,
+  "lowest_branch_height": 7,
+  "growth_rate": 0.9,
+  "growth_logic_kit": "dtru:thin_conifer",
+  "leaves_properties": "dtru:pine",
+  "environment_factors" : {
+    "#forge:is_hot": 0.50,
+    "#forge:is_wet": 0.75
+  },
+  "perfect_biomes": { "tag": "#forge:is_coniferous" },
+  "primitive_sapling": "regions_unexplored:pine_sapling",
+  "world_gen_acceptable_soils": [ "snow_like" ],
+  "acceptable_soils": ["dirt_like"],
+  "mega_species": "dtru:mega_pine",
+  "features" : [
+    "conifer_topper",
+    {
+      "name": "dtru:biome_predicate_2",
+      "properties": {
+        "gen_feature": {
+          "name": "dtru:soil_whitelist",
+          "properties": {
+            "allowed_soil": "peat_no_grass",
+            "replacement_species": "dtru:pine_twiglet"
+          }
+        },
+        "biome_predicate": { "name": "regions_unexplored:pine_taiga" }
+      }
+    },
+    {
+      "name": "biome_predicate",
+      "properties": {
+        "gen_feature": "dtru:stripped_bottom",
+        "biome_predicate": { "name": "regions_unexplored:(frozen_pine_taiga|pine_slopes)" }
+      }
+    },
+    {
+      "name": "dtru:biome_predicate",
+      "properties": {
+        "gen_feature": {
+          "name": "vines",
+          "properties": {
+            "max_length": 12,
+            "quantity": 24
+          }
+        },
+        "biome_predicate": { "name": "regions_unexplored:fungal_fen" }
+      }
+    }
+  ],
+  "lang_overrides": {
+    "seed": "Pine Cone"
+  }
+}
