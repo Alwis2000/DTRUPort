@@ -63,7 +63,7 @@ import net.regions_unexplored.world.level.feature.tree.nether.TallBrimWillowFeat
 //import net.regions_unexplored.world.level.feature.tree.nether.BrimWillowFeature;
 //import net.regions_unexplored.world.level.feature.tree.nether.TallBrimWillowFeature;
 
-//@EventBusSubscriber()
+@EventBusSubscriber(modid = DtruPort.MOD_ID)
 public class DTRURegistries {
     public static final VoxelShape MUSHROOM_CAP_CONE_BASE = Shapes.box(5.0D/16, 3.0D/16, 5.0D/16, 11.0D/16, 6.0D/16, 11.0D/16);
     public static final VoxelShape MUSHROOM_CAP_TIP_1 = Shapes.box(6.0D/16, 6.0D/16, 6.0D/16, 10.0D/16, 9.0D/16, 10.0D/16);
@@ -98,7 +98,7 @@ public class DTRURegistries {
 
     @SubscribeEvent
     public static void registerLeavesPropertiesTypes(TypeRegistryEvent<LeavesProperties> event) {
-//        if (!event.isEntryOfType(CellKit.class)) return;
+        if (!event.isEntryOfType(LeavesProperties.class)) return;
 //        event.registerType(DtruPort.location(DtruPort.MOD_ID, "cobweb"), CobwebLeavesProperties.TYPE);
     }
 

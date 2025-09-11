@@ -3,6 +3,7 @@ package net.dviousdingle.dtruport.cell;
 
 //import com.ferreusveritas.dynamictrees.cell.MatrixCell;
 
+import com.dtteam.dynamictrees.api.registry.TypedRegistry;
 import com.dtteam.dynamictrees.systems.cell.MatrixCell;
 
 public class PoplarLeafCell extends MatrixCell {
@@ -19,5 +20,4 @@ public class PoplarLeafCell extends MatrixCell {
             0, 1, 1, 1, 1, 0, 0, 0, //W Maps 0 -> 0, * -> 1
             0, 1, 1, 1, 1, 0, 0, 0  //E Maps 0 -> 0, * -> 1
     };
-
 }

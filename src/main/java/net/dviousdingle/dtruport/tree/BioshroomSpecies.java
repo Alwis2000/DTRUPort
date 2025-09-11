@@ -26,6 +26,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateHolder;
 
 public class BioshroomSpecies extends HugeMushroomSpecies {
     public static final TypedRegistry.EntryType<Species> TYPE = createDefaultMushroomType(BioshroomSpecies::new);
@@ -49,5 +50,4 @@ public class BioshroomSpecies extends HugeMushroomSpecies {
                     }
                 }));
     }
-
 }

@@ -21,7 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class DTRUCellKits {
 
-    public static final CellKit SPARSE = new CellKit(ResourceLocation.tryBuild(DtruPort.MOD_ID, "sparse")){
+    public static final CellKit SPARSE = new CellKit(DtruPort.location("sparse")){
         private final Cell sparseBranch = new SparseBranchCell();
         private final Cell sparseLeaves = new NormalCell(1);
 
@@ -53,7 +53,7 @@ public class DTRUCellKits {
         }
     };
 
-    public static final CellKit EUCALYPTUS = new CellKit(ResourceLocation.tryBuild(DtruPort.MOD_ID, "eucalyptus")) {
+    public static final CellKit EUCALYPTUS = new CellKit(DtruPort.location("eucalyptus")) {
 
         private final Cell eucalyptusTopBranch = new BambooTopBranchCell();
         private final Cell eucalyptusBranch = new NormalCell(2);
@@ -104,7 +104,7 @@ public class DTRUCellKits {
 
     };
 
-    public static final CellKit POPLAR = new CellKit(ResourceLocation.tryBuild(DtruPort.MOD_ID, "poplar")) {
+    public static final CellKit POPLAR = new CellKit(DtruPort.location( "poplar")) {
 
         private final Cell poplarBranch = new PoplarBranchCell();
         private final Cell poplarTopBranch = new PoplarTopBranchCell();
@@ -155,7 +155,7 @@ public class DTRUCellKits {
 
     };
 
-    public static final CellKit BAMBOO = new CellKit(ResourceLocation.tryBuild(DtruPort.MOD_ID, "bamboo")) {
+    public static final CellKit BAMBOO = new CellKit(DtruPort.location( "bamboo")) {
 
         private final Cell bambooTopBranch = new BambooTopBranchCell();
         private final Cell bambooUpperTrunk = new NormalCell(2);
@@ -332,7 +332,7 @@ public class DTRUCellKits {
         }
     };
 
-    public static final CellKit COBALT = new CellKit(ResourceLocation.tryBuild(DtruPort.MOD_ID, "cobalt")) {
+    public static final CellKit COBALT = new CellKit(DtruPort.location("cobalt")) {
 
         private final Cell branch = new Cell(){
             @Override
@@ -430,6 +430,7 @@ public class DTRUCellKits {
     };
 
     public static void register(final Registry<CellKit> registry) {
+
         registry.registerAll(SPARSE, EUCALYPTUS, POPLAR, BAMBOO, DOME, JOSHUA, COBALT, WILLOW);
     }
 

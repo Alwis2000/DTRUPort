@@ -23,16 +23,19 @@ import com.dtteam.dynamictrees.block.leaves.LeavesProperties;
 import com.dtteam.dynamictrees.block.soil.SoilProperties;
 import com.dtteam.dynamictrees.data.GatherDataHelper;
 import com.dtteam.dynamictrees.event.TypeRegistryEvent;
+import com.dtteam.dynamictrees.platform.NeoForgeCompatHelper;
 import com.dtteam.dynamictrees.systems.BranchConnectables;
 import com.dtteam.dynamictrees.tree.TreeHelper;
 import com.dtteam.dynamictrees.tree.family.Family;
 import com.dtteam.dynamictrees.tree.species.Species;
+import com.dtteam.dynamictrees.treepack.Resources;
 import com.dtteam.dynamictreesplus.block.mushroom.CapProperties;
 import net.dviousdingle.dtruport.DtruPort;
 import net.dviousdingle.dtruport.block.BioshroomCapProperties;
 import net.dviousdingle.dtruport.block.GreenBioshroomCapProperties;
 import net.dviousdingle.dtruport.block.PinkBioshroomCapProperties;
 import net.dviousdingle.dtruport.block.YellowBioshroomCapProperties;
+import net.dviousdingle.dtruport.data.DataGen;
 import net.dviousdingle.dtruport.tree.BioshroomSpecies;
 import net.dviousdingle.dtruport.tree.SmallBioshroomSpecies;
 import net.minecraft.core.Direction;
@@ -44,19 +47,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.regions_unexplored.block.RuBlocks;
+import net.regions_unexplored.world.level.block.other_dirt.AshenDirtBlock;
 //import net.minecraftforge.data.event.GatherDataEvent;
 //import net.minecraftforge.eventbus.api.SubscribeEvent;
 //import net.regions_unexplored.block.RuBlocks;
 
 public class DTRUPlusRegistries {
     public static void gatherData(final GatherDataEvent event) {
-        GatherDataHelper.gatherAllData(DtruPort.MOD_ID, event,
-                SoilProperties.REGISTRY,
-                Family.REGISTRY,
-                Species.REGISTRY,
-                LeavesProperties.REGISTRY,
-                CapProperties.REGISTRY
-        );
+        Resources.MANAGER.gatherData();
+//        GatherDataHelper.gatherAllData(DtruPort.MOD_ID, event,
+//                SoilProperties.REGISTRY,
+//                Family.REGISTRY,
+//                Species.REGISTRY,
+//                LeavesProperties.REGISTRY,
+//                CapProperties.REGISTRY
+//        );
+        DataGen.dataGen(event);
+
     }
 
     @SubscribeEvent

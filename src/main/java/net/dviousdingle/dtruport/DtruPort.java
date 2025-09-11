@@ -49,20 +49,18 @@ public class DtruPort {
 
     public DtruPort(IEventBus bus, ModContainer modContainer) {
 //        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
-        final IEventBus modEventBus = ModLoadingContext.get().getActiveContainer().getEventBus();
         bus.addListener(this::commonSetup);
         bus.addListener(this::clientSetup);
         bus.addListener(this::gatherData);
 //        NeoForge.EVENT_BUS.addListener(DtruPort::gatherData);
 
-//        if (isDynamicTreesPlusLoaded()){
-//            modEventBus.register(new DTRUPlusRegistries());
-//        }
+        if (isDynamicTreesPlusLoaded()){
+            bus.register(new DTRUPlusRegistries());
+        }
 
 //        NeoForge.EVENT_BUS.register(this);
 //        MinecraftForge.EVENT_BUS.register(this);
-
+        bus.register(this);
         NeoForgeRegistryHandler.setup(MOD_ID, bus);
 //        RegistryHandler.setup(MOD_ID);
         DTRURegistries.setup();
