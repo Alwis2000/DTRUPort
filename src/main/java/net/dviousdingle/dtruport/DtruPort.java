@@ -16,6 +16,8 @@ import com.dtteam.dynamictrees.data.GatherDataHelper;
 import com.dtteam.dynamictrees.registry.NeoForgeRegistryHandler;
 import com.dtteam.dynamictrees.tree.family.Family;
 import com.dtteam.dynamictrees.tree.species.Species;
+import com.dtteam.dynamictrees.treepack.Resources;
+import com.dtteam.dynamictreesplus.block.mushroom.CapProperties;
 import net.dviousdingle.dtruport.init.DTRUClient;
 import net.dviousdingle.dtruport.init.DTRUPlusRegistries;
 import net.dviousdingle.dtruport.init.DTRURegistries;
@@ -31,6 +33,11 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.List;
+import java.util.Objects;
 //import net.minecraftforge.common.MinecraftForge;
 //import net.minecraftforge.data.event.GatherDataEvent;
 //import net.minecraftforge.eventbus.api.IEventBus;
@@ -47,6 +54,10 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 public class DtruPort {
     public static final String MOD_ID = "dtru";
 
+    public static final Logger LOGGER = LogManager.getLogger();
+
+    public static final boolean useLogger = Objects.equals(System.getProperty("forgegradle.runs.dev"), "true");
+
     public DtruPort(IEventBus bus, ModContainer modContainer) {
 //        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::commonSetup);
@@ -60,7 +71,7 @@ public class DtruPort {
 
 //        NeoForge.EVENT_BUS.register(this);
 //        MinecraftForge.EVENT_BUS.register(this);
-        bus.register(this);
+//        bus.register(this);
         NeoForgeRegistryHandler.setup(MOD_ID, bus);
 //        RegistryHandler.setup(MOD_ID);
         DTRURegistries.setup();
@@ -75,7 +86,7 @@ public class DtruPort {
         DTRUClient.setup();
     }
 
-    @SubscribeEvent
+//    @SubscribeEvent
     private void gatherData(final GatherDataEvent event) {
         if (isDynamicTreesPlusLoaded()){
             DTRUPlusRegistries.gatherData(event);
@@ -87,6 +98,37 @@ public class DtruPort {
                     LeavesProperties.REGISTRY
             );
         }
+
+//        Resources.MANAGER.gatherData();
+//        start.dataGen(event);
+    }
+
+    public static void logger(Object... x) {
+
+        // if (General.bool.get())
+        if (useLogger) {
+            StringBuilder output = new StringBuilder();
+
+            for (Object i : x) {
+                if (i == null) output.append(", ").append("null");
+                else if (i.getClass().isArray()) {
+                    output.append(", [");
+                    for (Object c : (int[]) i) {
+                        output.append(c).append(",");
+                    }
+                    output.append("]");
+                } else if (i instanceof List) {
+                    output.append(", [");
+                    for (Object c : (List) i) {
+                        output.append(c);
+                    }
+                    output.append("]");
+                } else
+                    output.append(", ").append(i);
+            }
+            LOGGER.info(output.substring(1));
+        }
+
     }
 
     public static ResourceLocation location (final String name){

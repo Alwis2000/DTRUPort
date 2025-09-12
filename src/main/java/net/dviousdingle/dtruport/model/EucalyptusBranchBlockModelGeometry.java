@@ -31,21 +31,9 @@ public class EucalyptusBranchBlockModelGeometry extends BranchBlockModelGeometry
         this.overlayTextureLocation = overlayTextureLocation;
     }
 
-//    @Override
-//    public BakedModel bake(IGeometryBakingContext context, ModelBaker modelBaker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ItemOverrides itemOverrides, ResourceLocation) {
-//        boolean useThickModel = forceThickness;
-//        if (!useThickModel) {
-//            return new EucalyptusBranchBlockBakedModel(context, this.barkTextureLocation, this.ringsTextureLocation, this.overlayTextureLocation, spriteGetter);
-//        } else {
-//            if (this.thickRingsTextureLocation == null)
-//                this.thickRingsTextureLocation = this.ringsTextureLocation.withSuffix("_thick");
-//            return new ThickEucalyptusBranchBlockBakedModel(context, this.barkTextureLocation, this.ringsTextureLocation, this.overlayTextureLocation, this.thickRingsTextureLocation, spriteGetter);
-//        }
-//    }
-
     @Override
     public BakedModel bake(IGeometryBakingContext context, ModelBaker modelBaker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides itemOverrides) {
-        boolean useThickModel = forceThickness;
+        boolean useThickModel = false;
         if (!useThickModel) {
             return new EucalyptusBranchBlockBakedModel(context, this.barkTextureLocation, this.ringsTextureLocation, this.overlayTextureLocation, spriteGetter);
         } else {

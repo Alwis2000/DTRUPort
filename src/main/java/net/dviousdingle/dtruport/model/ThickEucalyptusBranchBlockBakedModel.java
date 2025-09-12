@@ -75,8 +75,8 @@ public class ThickEucalyptusBranchBlockBakedModel extends EucalyptusBranchBlockB
             int radius = i + ThickBranchBlock.MAX_RADIUS + 1;
             trunksBark[i] = bakeTrunkBark(radius, this.barkTexture, this.barkOverlayTexture, true);
             trunksTopBark[i] = bakeTrunkBark(radius, this.barkTexture, this.barkOverlayTexture, false);
-//            trunksTopRings[i] = bakeTrunkRings(radius, thickRingsTexture, Direction.UP);
-//            trunksBotRings[i] = bakeTrunkRings(radius, thickRingsTexture, Direction.DOWN);
+            trunksTopRings[i] = bakeTrunkRings(radius, thickRingsTexture, Direction.UP);
+            trunksBotRings[i] = bakeTrunkRings(radius, thickRingsTexture, Direction.DOWN);
         }
     }
 
@@ -126,50 +126,50 @@ public class ThickEucalyptusBranchBlockBakedModel extends EucalyptusBranchBlockB
         return builder.build();
     }
 
-//    public BakedModel bakeTrunkRings(int radius, TextureAtlasSprite ring, Direction face) {
-//        IModelBuilder<?> builder = ModelHelper.getModelBuilder(this.blockModel.customData, ring);
-//        AABB wholeVolume = new AABB(8 - radius, 0, 8 - radius, 8 + radius, 16, 8 + radius);
-//        int wholeVolumeWidth = 48;
-//
-//        ArrayList<Vec3i> offsets = new ArrayList<>();
-//
-//        for (CoordUtils.Surround dir : CoordUtils.Surround.values()) {
-//            offsets.add(dir.getOffset()); // 8 surrounding component pieces
-//        }
-//        offsets.add(new Vec3i(0, 0, 0)); // Center
-//
-//        for (Vec3i offset : offsets) {
-//            Vec3 scaledOffset = new Vec3(offset.getX() * 16, offset.getY() * 16, offset.getZ() * 16); // Scale the dimensions to match standard minecraft texels
-//            AABB partBoundary = new AABB(0, 0, 0, 16, 16, 16).move(scaledOffset).intersect(wholeVolume);
-//
-//            Vector3f posFrom = new Vector3f((float) partBoundary.minX, (float) partBoundary.minY, (float) partBoundary.minZ);
-//            Vector3f posTo = new Vector3f((float) partBoundary.maxX, (float) partBoundary.maxY, (float) partBoundary.maxZ);
-//
-//            Map<Direction, BlockElementFace> mapFacesIn = Maps.newEnumMap(Direction.class);
-//            float textureOffsetX = -16f;
-//            float textureOffsetZ = -16f;
-//
-//            float minX = ((float) ((partBoundary.minX - textureOffsetX) / wholeVolumeWidth)) * 16f;
-//            float maxX = ((float) ((partBoundary.maxX - textureOffsetX) / wholeVolumeWidth)) * 16f;
-//            float minZ = ((float) ((partBoundary.minZ - textureOffsetZ) / wholeVolumeWidth)) * 16f;
-//            float maxZ = ((float) ((partBoundary.maxZ - textureOffsetZ) / wholeVolumeWidth)) * 16f;
-//
-//            if (face == Direction.DOWN) {
-//                minZ = ((float) ((partBoundary.maxZ - textureOffsetZ) / wholeVolumeWidth)) * 16f;
-//                maxZ = ((float) ((partBoundary.minZ - textureOffsetZ) / wholeVolumeWidth)) * 16f;
-//            }
-//
-//            float[] uvs = new float[]{minX, minZ, maxX, maxZ};
-//
-//            BlockFaceUV uvface = new BlockFaceUV(uvs, getFaceAngle(Axis.Y, face));
-//            mapFacesIn.put(face, new BlockElementFace(null, -1, null, uvface));
-//
-//            BlockElement part = new BlockElement(posFrom, posTo, mapFacesIn, null, true);
-//            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part, part.faces.get(face), ring, face, BlockModelRotation.X0_Y0));
-//        }
-//
-//        return builder.build();
-//    }
+    public BakedModel bakeTrunkRings(int radius, TextureAtlasSprite ring, Direction face) {
+        IModelBuilder<?> builder = ModelHelper.getModelBuilder(this.blockModel.customData, ring);
+        AABB wholeVolume = new AABB(8 - radius, 0, 8 - radius, 8 + radius, 16, 8 + radius);
+        int wholeVolumeWidth = 48;
+
+        ArrayList<Vec3i> offsets = new ArrayList<>();
+
+        for (CoordUtils.Surround dir : CoordUtils.Surround.values()) {
+            offsets.add(dir.getOffset()); // 8 surrounding component pieces
+        }
+        offsets.add(new Vec3i(0, 0, 0)); // Center
+
+        for (Vec3i offset : offsets) {
+            Vec3 scaledOffset = new Vec3(offset.getX() * 16, offset.getY() * 16, offset.getZ() * 16); // Scale the dimensions to match standard minecraft texels
+            AABB partBoundary = new AABB(0, 0, 0, 16, 16, 16).move(scaledOffset).intersect(wholeVolume);
+
+            Vector3f posFrom = new Vector3f((float) partBoundary.minX, (float) partBoundary.minY, (float) partBoundary.minZ);
+            Vector3f posTo = new Vector3f((float) partBoundary.maxX, (float) partBoundary.maxY, (float) partBoundary.maxZ);
+
+            Map<Direction, BlockElementFace> mapFacesIn = Maps.newEnumMap(Direction.class);
+            float textureOffsetX = -16f;
+            float textureOffsetZ = -16f;
+
+            float minX = ((float) ((partBoundary.minX - textureOffsetX) / wholeVolumeWidth)) * 16f;
+            float maxX = ((float) ((partBoundary.maxX - textureOffsetX) / wholeVolumeWidth)) * 16f;
+            float minZ = ((float) ((partBoundary.minZ - textureOffsetZ) / wholeVolumeWidth)) * 16f;
+            float maxZ = ((float) ((partBoundary.maxZ - textureOffsetZ) / wholeVolumeWidth)) * 16f;
+
+            if (face == Direction.DOWN) {
+                minZ = ((float) ((partBoundary.maxZ - textureOffsetZ) / wholeVolumeWidth)) * 16f;
+                maxZ = ((float) ((partBoundary.minZ - textureOffsetZ) / wholeVolumeWidth)) * 16f;
+            }
+
+            float[] uvs = new float[]{minX, minZ, maxX, maxZ};
+
+            BlockFaceUV uvface = new BlockFaceUV(uvs, getFaceAngle(Axis.Y, face));
+            mapFacesIn.put(face, new BlockElementFace(null, -1, null, uvface));
+
+            BlockElement part = new BlockElement(posFrom, posTo, mapFacesIn, null, true);
+            builder.addCulledFace(face, ModelHelper.makeBakedQuad(part, part.faces.get(face), ring, face, BlockModelRotation.X0_Y0));
+        }
+
+        return builder.build();
+    }
 
     @Nonnull
     @Override
